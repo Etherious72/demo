@@ -1,0 +1,55 @@
+<view class="page-wrapper">
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <view class="card-title">我的分类</view>
+        <view class="card-subtitle">整理你的吃喝玩乐收藏</view>
+      </view>
+      <button class="primary-btn" size="mini" bindtap="handleAddCategory">新增分类</button>
+    </view>
+
+    <view wx:if="{{categories.length}}">
+      <block wx:for="{{categories}}" wx:key="id">
+        <view class="list-item" bindtap="goCategory" data-id="{{item.id}}">
+          <view>
+            <view class="list-item-title">{{item.name}}</view>
+            <view class="list-item-desc">
+              共 {{item.count || 0}} 项 · 未做 {{item.todoCount || 0}}
+            </view>
+          </view>
+          <view class="list-item-right" catchtap="onCategoryActions" data-id="{{item.id}}" data-name="{{item.name}}">
+            <text style="font-size: 40rpx; color: #cccccc;">···</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:else class="empty-tip">
+      还没有任何分类，先创建一个吧～
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">快速随机</view>
+      <view class="card-subtitle">从全部未做项目里抽一个</view>
+    </view>
+    <button class="primary-btn" bindtap="quickRandom">一键随机</button>
+    <view wx:if="{{randomResult}}" style="margin-top: 24rpx;">
+      <view class="section-title">本次结果</view>
+      <view class="list-item" bindtap="goItemDetail" data-id="{{randomResult.id}}">
+        <view>
+          <view class="list-item-title">{{randomResult.name}}</view>
+          <view class="list-item-desc">{{randomResult.categoryName}}</view>
+        </view>
+        <view class="tag tag-todo">未做</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!--index.wxml-->
+<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    Weixin
+  </view>
+</scroll-view>

@@ -1,0 +1,47 @@
+<view class="page-wrapper">
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <view class="card-title">{{item.name}}</view>
+        <view class="card-subtitle">
+          {{item.address || '暂无地址信息'}}
+        </view>
+      </view>
+      <view>
+        <view wx:if="{{item.status === 'todo'}}" class="tag tag-todo">未做</view>
+        <view wx:if="{{item.status === 'done'}}" class="tag tag-done">已做</view>
+        <view wx:if="{{item.status === 'repeat'}}" class="tag tag-repeat">可再选</view>
+      </view>
+    </view>
+
+    <view class="section-title">备注</view>
+    <view class="list-item-desc" style="margin-bottom: 16rpx;">
+      {{item.note || '暂无备注'}}
+    </view>
+
+    <view class="section-title">来源链接</view>
+    <view class="list-item-desc">
+      {{item.sourceLink || '暂无'}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">状态管理</view>
+    <view class="status-filter">
+      <view class="status-chip {{item.status === 'todo' ? 'active' : ''}}" bindtap="changeStatus" data-status="todo">
+        标记为未做
+      </view>
+      <view class="status-chip {{item.status === 'done' ? 'active' : ''}}" bindtap="changeStatus" data-status="done">
+        标记为已做
+      </view>
+      <view class="status-chip {{item.status === 'repeat' ? 'active' : ''}}" bindtap="changeStatus" data-status="repeat">
+        标记为可再选
+      </view>
+    </view>
+  </view>
+
+  <view class="fixed-bottom">
+    <button class="secondary-btn" style="margin-bottom: 12rpx;" bindtap="handleDelete">删除</button>
+    <button class="primary-btn" bindtap="handleEdit">编辑</button>
+  </view>
+</view>

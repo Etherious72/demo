@@ -1,0 +1,67 @@
+<view class="page-wrapper">
+  <view class="card">
+    <view class="card-header">
+      <view>
+        <view class="card-title">{{category.name || '分类'}}</view>
+        <view class="card-subtitle">
+          共 {{items.length}} 项 · 未做 {{todoCount}}
+        </view>
+      </view>
+      <button class="secondary-btn" size="mini" bindtap="handleRandom">随机一个</button>
+    </view>
+
+    <view class="status-filter">
+      <view class="status-chip {{statusFilter === 'all' ? 'active' : ''}}" bindtap="changeStatusFilter" data-status="all">
+        全部
+      </view>
+      <view class="status-chip {{statusFilter === 'todo' ? 'active' : ''}}" bindtap="changeStatusFilter" data-status="todo">
+        未做
+      </view>
+      <view class="status-chip {{statusFilter === 'done' ? 'active' : ''}}" bindtap="changeStatusFilter" data-status="done">
+        已做
+      </view>
+      <view class="status-chip {{statusFilter === 'repeat' ? 'active' : ''}}" bindtap="changeStatusFilter" data-status="repeat">
+        可再选
+      </view>
+    </view>
+
+    <view wx:if="{{displayItems.length}}">
+      <block wx:for="{{displayItems}}" wx:key="id">
+        <view class="list-item" bindtap="goItemDetail" data-id="{{item.id}}">
+          <view>
+            <view class="list-item-title">{{item.name}}</view>
+            <view class="list-item-desc">
+              {{item.note || '暂无备注'}}
+            </view>
+          </view>
+          <view class="list-item-right">
+            <view wx:if="{{item.status === 'todo'}}" class="tag tag-todo">未做</view>
+            <view wx:if="{{item.status === 'done'}}" class="tag tag-done">已做</view>
+            <view wx:if="{{item.status === 'repeat'}}" class="tag tag-repeat">可再选</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:else class="empty-tip">
+      该分类下还没有内容，点击右下角新增吧～
+    </view>
+  </view>
+
+  <view wx:if="{{randomResult}}" class="card">
+    <view class="section-title">本次随机结果</view>
+    <view class="list-item" bindtap="goItemDetail" data-id="{{randomResult.id}}">
+      <view>
+        <view class="list-item-title">{{randomResult.name}}</view>
+        <view class="list-item-desc">{{randomResult.note || '暂无备注'}}</view>
+      </view>
+      <view class="tag tag-todo">未做优先</view>
+    </view>
+    <view style="margin-top: 16rpx; text-align: right;">
+      <button size="mini" class="secondary-btn" bindtap="handleRandom">再抽一次</button>
+    </view>
+  </view>
+
+  <view class="fixed-bottom">
+    <button class="primary-btn" bindtap="addItem">新增内容</button>
+  </view>
+</view>

@@ -1,0 +1,68 @@
+<view class="page-wrapper">
+  <view class="card">
+    <view class="section-title">{{isEdit ? '编辑内容' : '新增内容'}}</view>
+
+    <view class="form-item">
+      <view class="form-label">名称</view>
+      <input
+        class="form-input"
+        placeholder="例如：某某咖啡店 / 某某火锅"
+        placeholder-class="form-input-placeholder"
+        value="{{form.name}}"
+        bindinput="onInputChange"
+        data-key="name"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">备注</view>
+      <textarea
+        class="form-textarea"
+        placeholder="可记录特色、推荐菜、适合场景等"
+        placeholder-class="form-input-placeholder"
+        value="{{form.note}}"
+        bindinput="onInputChange"
+        data-key="note"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">地址（可选）</view>
+      <input
+        class="form-input"
+        placeholder="如：XX路XX号 / 某某商场内"
+        placeholder-class="form-input-placeholder"
+        value="{{form.address}}"
+        bindinput="onInputChange"
+        data-key="address"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">来源链接（可选）</view>
+      <input
+        class="form-input"
+        placeholder="小红书 / 大众点评等链接"
+        placeholder-class="form-input-placeholder"
+        value="{{form.sourceLink}}"
+        bindinput="onInputChange"
+        data-key="sourceLink"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">状态</view>
+      <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{statusIndex}}" bindchange="onStatusChange">
+        <view class="form-input">
+          {{statusOptions[statusIndex].label}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="fixed-bottom">
+    <button class="primary-btn" bindtap="handleSubmit">
+      {{isEdit ? '保存修改' : '保存'}}
+    </button>
+  </view>
+</view>
