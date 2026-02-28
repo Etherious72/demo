@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/item-edit/item-edit",
+    "pages/item-detail/item-detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "吃喝玩乐随机决策",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#f5f5f5"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
